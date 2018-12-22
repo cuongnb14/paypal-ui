@@ -40,6 +40,15 @@ def active_plan(request, plan_id):
     return redirect(reverse('dashboard:index'))
 
 
+def delete_plan(request, plan_id):
+    try:
+        paypal.delete_plan(plan_id)
+        messages.add_message(request, messages.SUCCESS, "Delete plan success")
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, str(e))
+    return redirect(reverse('dashboard:index'))
+
+
 def plan_detail(request, plan_id):
     plan = paypal.get_plan(plan_id)
     context = {

@@ -86,5 +86,26 @@ class PaypalAPI:
         except ResourceNotFound as error:
             print("Billing Plan Not Found")
 
+    def delete_plan(self, plan_id):
+        try:
+            billing_plan = BillingPlan.find(plan_id)
+
+            billing_plan_update_attributes = [
+                {
+                    "op": "replace",
+                    "path": "/",
+                    "value": {
+                        "state": "DELETED"
+                    }
+                }
+            ]
+
+            if billing_plan.replace(billing_plan_update_attributes):
+                return billing_plan
+            else:
+                raise Exception(billing_plan.error)
+        except ResourceNotFound as error:
+            raise Exception("Billing Plan Not Found")
+
 
 paypal = PaypalAPI()
