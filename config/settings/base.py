@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'dbs/db.sqlite3'),
+        'NAME': str(BASE_DIR.path('dbs/db.sqlite3')),
     }
 }
 
@@ -137,9 +137,9 @@ STATICFILES_FINDERS = [
 import paypalrestsdk
 
 paypalrestsdk.configure({
-    "mode": env("PAYPAL_MODE", "sandbox"),  # sandbox or live
-    "client_id": env("PAYPAL_CLIENT_ID", ""),
-    "client_secret": env("EB1rwiF6k2lsukSVg-JtuaARqBKsoMdfGzMx6qbuPPYJ36Q_8hlH22sO95BmkBxngUW57qOPvq54xjQI", "")
+    "mode": env("PAYPAL_MODE", default="sandbox"),  # sandbox or live
+    "client_id": env("PAYPAL_CLIENT_ID", default=""),
+    "client_secret": env("PAYPAL_CLIENT_SECRET", default="")
 })
 
 
