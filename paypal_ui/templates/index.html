@@ -31,16 +31,16 @@
                                 <tr>
                                     <td><a href="{% url 'dashboard:plan_detail' plan.id %}">{{ plan.id }}</a></td>
                                     <td>{{ plan.name }}</td>
-                                    <td>{{ plan.state }}</td>
+                                    <td><lable class="badge badge-success">{{ plan.state }}</lable></td>
                                     <td>{{ plan.description }}</td>
                                     <td>{{ plan.create_time }}</td>
                                     {#                                    <td>{{ plan.update_time }}</td>#}
                                     <td>
-                                        <a class="btn btn-danger"
+                                        <a class="btn btn-danger btn-sm"
                                            href="{% url 'dashboard:delete_plan' plan.id %}">Delete</a>
 
                                         {% if plan.state == 'CREATED' %}
-                                            <a class="btn btn-info" href="{% url 'dashboard:active_plan' plan.id %}">Active</a>
+                                            <a class="btn btn-info btn-sm" href="{% url 'dashboard:active_plan' plan.id %}">Active</a>
                                         {% endif %}
                                     </td>
                                 </tr>
