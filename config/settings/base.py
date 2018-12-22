@@ -137,9 +137,9 @@ STATICFILES_FINDERS = [
 import paypalrestsdk
 
 paypalrestsdk.configure({
-    "mode": "sandbox",  # sandbox or live
-    "client_id": "fake",
-    "client_secret": "fake"
+    "mode": env("PAYPAL_MODE", "sandbox"),  # sandbox or live
+    "client_id": env("PAYPAL_CLIENT_ID", ""),
+    "client_secret": env("EB1rwiF6k2lsukSVg-JtuaARqBKsoMdfGzMx6qbuPPYJ36Q_8hlH22sO95BmkBxngUW57qOPvq54xjQI", "")
 })
 
 
