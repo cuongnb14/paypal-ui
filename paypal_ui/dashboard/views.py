@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.urls import reverse
 from django.shortcuts import redirect
+import json
 
 from .paypay_api import paypal
 
@@ -37,3 +38,11 @@ def active_plan(request, plan_id):
     except Exception as e:
         messages.add_message(request, messages.ERROR, str(e))
     return redirect(reverse('dashboard:index'))
+
+
+def plan_detail(request, plan_id):
+    plan = paypal.get_plan(plan_id)
+    context = {
+        'plan': json.dumps(plan.to_dict(), indent=4)
+    }
+    return render(request, 'plan_detail.html', context)

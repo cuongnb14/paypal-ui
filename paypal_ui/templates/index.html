@@ -29,7 +29,7 @@
                             <tbody>
                             {% for plan in plans %}
                                 <tr>
-                                    <td>{{ plan.id }}</td>
+                                    <td><a href="{% url 'dashboard:plan_detail' plan.id %}">{{ plan.id }}</a></td>
                                     <td>{{ plan.name }}</td>
                                     <td>{{ plan.state }}</td>
                                     <td>{{ plan.description }}</td>

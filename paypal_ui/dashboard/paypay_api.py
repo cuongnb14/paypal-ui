@@ -1,7 +1,5 @@
 from paypalrestsdk import BillingPlan, ResourceNotFound, BillingAgreement
 
-from . import logger
-
 
 class PaypalAPI:
     """
@@ -66,7 +64,7 @@ class PaypalAPI:
 
         if billing_plan.create():
             return True, billing_plan
-        logger.error(billing_plan.error)
+        print(billing_plan.error)
         return False, billing_plan.error['message']
 
     def active_plan(self, plan_id):
@@ -81,7 +79,12 @@ class PaypalAPI:
         except ResourceNotFound as error:
             raise Exception("Billing Plan Not Found")
 
+    def get_plan(self, plan_id):
+        try:
+            billing_plan = BillingPlan.find(plan_id)
+            return billing_plan
+        except ResourceNotFound as error:
+            print("Billing Plan Not Found")
+
 
 paypal = PaypalAPI()
-
-paypal.get_billing_plans("ALL")
