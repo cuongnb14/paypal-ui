@@ -1,0 +1,28 @@
+
+version: "3"
+
+services:
+
+    paypal_ui:
+        #restart: always
+        build: .
+        image: paypal_ui:0.1.0
+        networks:
+            - paypal_ui
+        ports:
+            - "0.0.0.0:8000:8000"
+        volumes:
+            - ./:/usr/src/app
+        hostname: paypal_ui
+        environment:
+            DJANGO_SETTINGS_MODULE: 'config.settings.base'
+        # command: /usr/local/bin/gunicorn config.wsgi:application -w 2 -b :8000
+#        command: python3 manage.py runserver 0.0.0.0:8000
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "100M"
+                max-file: "3"
+
+networks:
+    paypal_ui:
