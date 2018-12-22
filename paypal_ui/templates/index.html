@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+
+            <div class="card">
+                <div class="card-header clearfix">
+                    <h4 class="float-left">List Billing Plans</h4>
+                    <div class="float-right">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-plan">Add Plan</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>State</th>
+                                <th>Description</th>
+                                <th>Create time</th>
+                                <th>Update time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for plan in plans %}
+                                <tr>
+                                    <td>{{ plan.id }}</td>
+                                    <td>{{ plan.name }}</td>
+                                    <td>{{ plan.state }}</td>
+                                    <td>{{ plan.description }}</td>
+                                    <td>{{ plan.create_time }}</td>
+                                    <td>{{ plan.update_time }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="add-plan" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Billing Plan Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="name" class="form-control" autocomplete="off">
+                            </div>
+
+                            <label for="" class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="description" class="form-control" autocomplete="off">
+                            </div>
+
+                            <hr>
+                            <h5 class="col-md-12">Merchant preferences</h5>
+                            <label for="" class="col-sm-3 col-form-label">Cancel Url</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="cancel_url" class="form-control" autocomplete="off">
+                            </div>
+
+                            <label for="" class="col-sm-3 col-form-label">Return Url</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="return_url" class="form-control" autocomplete="off">
+                            </div>
+
+                            <hr>
+                            <h5 class="col-md-12">Payment definitions</h5>
+                            <label for="" class="col-sm-3 col-form-label">Amount ($)</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="amount" class="form-control" autocomplete="off">
+                            </div>
+
+                            <label for="" class="col-sm-3 col-form-label">Frequency</label>
+                            <div class="col-sm-9">
+                                <select name="frequency" class="form-control">
+                                    <option value="DAY">DAY</option>
+                                    <option value="WEEK">WEEK</option>
+                                    <option value="MONTH">MONTH</option>
+                                    <option value="YEAR">YEAR</option>
+                                </select>
+                            </div>
+
+                            <label for="" class="col-sm-3 col-form-label">Payment Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="payment_name" class="form-control" autocomplete="off">
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-success mr-2">Submit</button>
+                        <button class="btn btn-light" data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
