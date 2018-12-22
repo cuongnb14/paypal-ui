@@ -132,6 +132,16 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
+# Config Paypal
+# ------------------------------------------------------------------------------
+import paypalrestsdk
+
+paypalrestsdk.configure({
+    "mode": "sandbox",  # sandbox or live
+    "client_id": "fake",
+    "client_secret": "fake"
+})
+
 
 # Config Logging
 # ------------------------------------------------------------------------------
