@@ -69,6 +69,18 @@ class PaypalAPI:
         logger.error(billing_plan.error)
         return False, billing_plan.error['message']
 
+    def active_plan(self, plan_id):
+        try:
+            billing_plan = BillingPlan.find(plan_id)
+
+            if billing_plan.activate():
+                return billing_plan.state
+            else:
+                raise Exception(billing_plan.error['message'])
+
+        except ResourceNotFound as error:
+            raise Exception("Billing Plan Not Found")
+
 
 paypal = PaypalAPI()
 

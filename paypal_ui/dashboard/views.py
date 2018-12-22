@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.urls import reverse
+from django.shortcuts import redirect
+
 from .paypay_api import paypal
 
 
@@ -25,3 +28,12 @@ def index(request):
     plans += paypal.get_billing_plans("CREATED")
     context["plans"] = plans
     return render(request, 'index.html', context)
+
+
+def active_plan(request, plan_id):
+    try:
+        paypal.active_plan(plan_id)
+        messages.add_message(request, messages.SUCCESS, "Active plan success")
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, str(e))
+    return redirect(reverse('dashboard:index'))

@@ -22,7 +22,8 @@
                                 <th>State</th>
                                 <th>Description</th>
                                 <th>Create time</th>
-                                <th>Update time</th>
+{#                                <th>Update time</th>#}
+                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -33,7 +34,12 @@
                                     <td>{{ plan.state }}</td>
                                     <td>{{ plan.description }}</td>
                                     <td>{{ plan.create_time }}</td>
-                                    <td>{{ plan.update_time }}</td>
+{#                                    <td>{{ plan.update_time }}</td>#}
+                                    <td>
+                                        {% if plan.state == 'CREATED' %}
+                                            <a class="btn btn-info" href="{% url 'dashboard:active_plan' plan.id %}">Active</a>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
